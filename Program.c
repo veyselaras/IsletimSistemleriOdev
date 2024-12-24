@@ -30,3 +30,17 @@ void arkaPlanProcessEkle(pid_t pid) {
     yeniProcess->sonraki = arkaplanListesi;
     arkaplanListesi = yeniProcess;
 }
+
+
+// Tüm arka plan süreçlerinin bitmesini beklemek
+void arkplanBekle() {
+    arkaplanProcess_t* suanki = arkaplanListesi;
+    while (suanki) {
+        int durum;
+        waitpid(suanki->pid, &durum, 0);
+        printf("[%d] retval: %d\n", suanki->pid, WEXITSTATUS(durum));
+        arkaplanProcess_t* temp = suanki;
+        suanki = suanki->sonraki;
+        free(temp);
+    }
+}
