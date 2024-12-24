@@ -22,4 +22,11 @@ void sigchld_handler(int signo) {
         }
     }
 }
-int a=10;
+
+// Arka plan sürecini listeye ekleme
+void arkaPlanProcessEkle(pid_t pid) {
+    arkaplanProcess_t* yeniProcess = malloc(sizeof(arkaplanProcess_t));
+    yeniProcess->pid = pid;
+    yeniProcess->sonraki = arkaplanListesi;
+    arkaplanListesi = yeniProcess;
+}
