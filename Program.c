@@ -22,3 +22,4 @@ void sigchld_handler(int signo) {
         }
     }
 }
+int a=10;
